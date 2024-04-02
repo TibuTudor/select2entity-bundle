@@ -11,15 +11,9 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class AutocompleteService
 {
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
+    private FormFactoryInterface $formFactory;
 
-    /**
-     * @var ManagerRegistry
-     */
-    private $doctrine;
+    private ManagerRegistry $doctrine;
 
     /**
      * @param FormFactoryInterface $formFactory
@@ -29,15 +23,9 @@ class AutocompleteService
     {
         $this->formFactory = $formFactory;
         $this->doctrine = $doctrine;
-    }   
+    }
 
-    /**
-     * @param Request                  $request
-     * @param string|FormTypeInterface $type
-     *
-     * @return array
-     */
-    public function getAutocompleteResults(Request $request, $type)
+    public function getAutocompleteResults(Request $request, string|FormTypeInterface $type): array
     {
         $form = $this->formFactory->create($type);
         $fieldOptions = $form->get($request->get('field_name'))->getConfig()->getOptions();
